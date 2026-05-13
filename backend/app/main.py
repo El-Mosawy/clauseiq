@@ -5,6 +5,7 @@
 from fastapi import FastAPI 
 from fastapi.middleware.cors import CORSMiddleware # just allows frontend and backend to talk without issues eventhough they are on different ports. Helps prevent harmful requests from other origins.
 from dotenv import load_dotenv
+from app.routes import contracts # import the contracts router to include it in the main app
 
 load_dotenv() # Load environment variables from .env file
 
@@ -26,3 +27,5 @@ app.add_middleware(
 @app.get("/health") # decorator that defines a get endpoint
 def health_check():
     return {"status": "ok", "service": "clauseiq-api"}
+
+app.include_router(contracts.router, prefix="/contracts", tags=["contracts"]) # include the contracts router in the main app with a prefix of /contracts and tag it as "contracts" for documentation purposes
