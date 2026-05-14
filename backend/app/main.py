@@ -24,8 +24,8 @@ app.add_middleware(
 )
 
 # simple endpoint to check if API is running
-@app.get("/health") # decorator that defines a get endpoint
+@app.get("/v1/health") # decorator that defines a get endpoint
 def health_check():
-    return {"status": "ok", "service": "clauseiq-api"}
+    return {"status": "ok", "service": "clauseiq-api", "version": "v1"}
 
-app.include_router(contracts.router, prefix="/contracts", tags=["contracts"]) # include the contracts router in the main app with a prefix of /contracts and tag it as "contracts" for documentation purposes
+app.include_router(contracts.router, prefix="/v1/contracts", tags=["contracts"]) # include the contracts router in the main app with a prefix of /contracts and tag it as "contracts" for documentation purposes
